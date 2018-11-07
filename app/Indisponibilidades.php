@@ -23,9 +23,9 @@ class Indisponibilidades extends Model
         return $this->belongsTo('App\Servidores','servidor');
     }
 
-    public function instancias()
+    public function instanciasF()
     {
-        return $this->belongsTo('App\Instancias','instancia');
+        return $this->belongsTo('App\Instancias','id');
     }
 
 

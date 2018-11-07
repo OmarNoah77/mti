@@ -23,7 +23,6 @@
       	  <button type="submit" class="btn btn-info" style="width:100px;">{{ trans('app.update_button') }}</button>
           <a class="btn btn-warning " href="{{ route(ADMIN.'.servidoresRoute.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancelar</a>
       	</div>
-
         {!! Form::close() !!}
     </div>
   </div>

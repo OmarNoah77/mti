@@ -24,7 +24,7 @@ class IndisponibilidadController extends Controller
     public function index()
     {
 
-        $items = Indisponibilidades::with('parentIndisponibilidades','server','instancias')->get();
+        $items = Indisponibilidades::with('parentIndisponibilidades','server','instanciasF')->get();
 
         return view('admin.indisponibilidadVistas.index', compact('items'));
     }

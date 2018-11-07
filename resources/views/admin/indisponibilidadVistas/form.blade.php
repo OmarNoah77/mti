@@ -3,25 +3,15 @@
 
 {!! Form::mySelect('nivel', 'Nivel de Indisponibilidad: ', config('variables.nivel'),['required','id' => 'ListaNivel', 'class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
 
-
+{!! Form::mySelect('servidor', 'Servidor: ', App\Servidores::pluck('ip', 'id')->toArray(), null, ['id' => 'server', 'class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
 
 <div class="row">  <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
       <div class="box-body" style="margin:10px;">
-          <label class="col-sm-5" for="nombre">Servidor</label>
-          <br>
-            <select name="servidor" id="server" style="width: 100%">
-               <option value="">Seleccionar Servidor</option>
-                  @foreach($servidores as $servidore)
-                  <option value="{{ $servidore->id }}">{{ $servidore->ip }}</option>
-                  @endforeach
-            </select>
-            <br>
-            <br>
             <div class="requerido-con-instancia">
           <label class="col-sm-5" for="nombre">Instancia</label>
           <br>
-            <select name="instancia[]" id="instancia" class="requerido-con-instancia" style="width: 100%" multiple="multiple">
+            <select name="instancia" id="instancia" class="requerido-con-instancia" style="width: 100%" multiple="multiple">
                <option value="">Selecciona un servidor primero</option>
             </select>
           <br>
@@ -72,43 +62,10 @@
 <!-- Script Select2 -->
 
 
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function () {
-        // inicializamos el plugin
-        $('#instancia').select2({
-            // Activamos la opcion "Tags" del plugin
-            tags: true,
-            tokenSeparators: [','],
-            ajax: {
-                dataType: 'json',
-                url: '{{ url("tags") }}',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        term: params.term
-                    }
-                },
-                processResults: function (data, page) {
-                  return {
-                    results: data
-                  };
-                },
-            }
-        });
-    });
-</script>
-@endsection
-
 
 <!-- <label>Seleccionar Servidor</label>
 
-<select name="servidor" id="servidor" class="chosen"> 
-<option value="">Seleccionar Servidor</option> 
-@foreach($servidores as $servidor) 
-<option value="{{ $servidor->id }}">{{ $servidor->ip }}</option> 
-@endforeach 
-</select>
+
 
 <br><br> 
 

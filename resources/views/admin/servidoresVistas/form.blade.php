@@ -11,21 +11,18 @@
 
 
 
+
+
+
 <div class="row">
   <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
       <div class="box-body" style="margin:10px;">
-          <label class="col-sm-5" for="nombre">Sistema operativo</label>
-          <br>
-            <select name="id_so" id="so" style="width: 100%">
-               <option value="">Seleccionar sistema</option>
-                  @foreach($sistemas as $sistema)
-                  <option value="{{ $sistema->id }}">{{ $sistema->nombre }}</option>
-                  @endforeach
-            </select>
+
+          {!! Form::mySelect('id_so', 'Sistema Operativo: ', App\SistemasOperativos::pluck('nombre', 'id')->toArray(), null, ['id' => 'so', 'class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
+
             <br>
-            <br>
-          <label class="col-sm-5" for="nombre">Version Sistema operativo</label>
+          <label class="chosen" for="nombre">Version Sistema operativo</label>
           <br>
             <select name="id_version" id="version" style="width: 100%">
                <option value="">Selecciona un sistema operativo primero</option>
@@ -105,23 +102,13 @@
     <div class="box" style="border:1px solid #d2d6de;">
     	<div class="box-body" style="margin:10px;">
 
+
 <div class="row">
   <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
       <div class="box-body" style="margin:10px;">
 
-
-      <label class="col-sm-5" for="nombre">Marca</label>
-      <br>
-      <select name="id_marca" id="marca" style="width: 100%">
-         <option value="14" name="id_marca">Seleccionar marca</option>
-            @foreach($marcas as $marca)
-            <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
-            @endforeach
-      </select>
-
-      <br>
-      <br>
+          {!! Form::mySelect('id_marca', 'Marca: ', App\Marcas::pluck('nombre', 'id')->toArray(), null, ['id' => 'marca', 'class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
 
       <label class="col-sm-5" for="nombre">Modelo</label>
       <select name="id_modelo" id="modelo" style="width: 100%"> 

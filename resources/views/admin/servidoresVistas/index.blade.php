@@ -30,7 +30,7 @@
 	        <table id="tbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th></th>
                     <th>Host name</th>
                     <th>IP</th>
                     <th>CPU</th>
@@ -64,7 +64,21 @@
             <tbody>
       					@foreach ($items as $item)
       						<tr>
-                      <td><a>{{$item->id }}</a></td>
+                    <td class="actions">
+                            <ul class="list-inline" style="margin-bottom:0px;">
+                                <li><a href="{{ route(ADMIN . '.servidoresRoute.edit', $item->id) }}" title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></li>
+                                <li>
+                                    {!! Form::open([
+                                        'class'=>'delete',
+                                        'url'  => route(ADMIN . '.servidoresRoute.destroy', $item->id),
+                                        'method' => 'DELETE',
+                                        ])
+                                    !!}
+                                    <button class="btn btn-danger btn-xs" title="{{ trans('app.delete_title') }}"><i class="fa fa-trash"></i></button>
+                                    {!! Form::close() !!}
+                                </li>
+                            </ul>
+                        </td>
                       <td><a>{{$item->hostname }}</a></td>
                       <td><a>{{$item->ip }}</a></td>
                       <td><a>{{$item->cpu }}</a></td>
@@ -96,21 +110,6 @@
                         	{{ $item->parent->nombre }}
                         @endif
                       </td>-->
-                      <td class="actions">
-                            <ul class="list-inline" style="margin-bottom:0px;">
-                                <li><a href="{{ route(ADMIN . '.servidoresRoute.edit', $item->id) }}" title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></li>
-                                <li>
-                                    {!! Form::open([
-                                        'class'=>'delete',
-                                        'url'  => route(ADMIN . '.servidoresRoute.destroy', $item->id),
-                                        'method' => 'DELETE',
-                                        ])
-                                    !!}
-                                    <button class="btn btn-danger btn-xs" title="{{ trans('app.delete_title') }}"><i class="fa fa-trash"></i></button>
-                                    {!! Form::close() !!}
-                                </li>
-                            </ul>
-                        </td>
       						</tr>
       					@endforeach
             </tbody>
