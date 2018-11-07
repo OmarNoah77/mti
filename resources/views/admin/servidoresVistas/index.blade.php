@@ -30,6 +30,7 @@
 	        <table id="tbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Host name</th>
                     <th>IP</th>
                     <th>CPU</th>
@@ -63,7 +64,7 @@
             <tbody>
       					@foreach ($items as $item)
       						<tr>
-                      
+                      <td><a>{{$item->id }}</a></td>
                       <td><a>{{$item->hostname }}</a></td>
                       <td><a>{{$item->ip }}</a></td>
                       <td><a>{{$item->cpu }}</a></td>

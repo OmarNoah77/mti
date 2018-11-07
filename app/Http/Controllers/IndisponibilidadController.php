@@ -3,26 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Indisponibilidades;
+use App\SistemasOperativos;
 use App\Servidores;
+use App\Ixs;
+use App\Instancias;
 
 
 
 class IndisponibilidadController extends Controller
-{
-    /**
+{    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $items = Indisponibilidades::with('parent')->get();
+
+        $items = Indisponibilidades::with('parentIndisponibilidades','server','instancias')->get();
 
         return view('admin.indisponibilidadVistas.index', compact('items'));
     }
+
+    
+    public function consultarInstancias(Request $request) 
+    { 
+        $servidores = $request->id; 
+        $ixs = Ixs::where('id_servidor', $servidores)->get(); 
+
+        $respuesta2 = array(); 
+        $respuesta2['ixs'] = $ixs->toArray(); 
+        return response()->json($respuesta2); 
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +50,8 @@ class IndisponibilidadController extends Controller
      */
     public function create()
     {
-        return view ('admin.indisponibilidadVistas.create');
+        $servidores = Servidores::orderBy('ip','asc')->get(); 
+          return view ('admin.indisponibilidadVistas.create', compact('servidores')); 
     }
 
     /**
@@ -46,7 +66,6 @@ class IndisponibilidadController extends Controller
 
         //return back()->withSuccess(trans('app.success_store'));
         return redirect()->route(ADMIN.'.indisponibilidadRoute.index')->withSuccess(trans('app.success_store'));
-  
     }
 
     /**
@@ -69,7 +88,6 @@ class IndisponibilidadController extends Controller
     public function edit($id)
     {
         $item = Indisponibilidades::findOrFail($id);
-
         return view('admin.indisponibilidadVistas.edit', compact('item'));
     }
 

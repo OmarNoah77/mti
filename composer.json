@@ -1,70 +1,25 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
-    "type": "project",
-    "require": {
-        "php": ">=7.0.0",
-        "barryvdh/laravel-debugbar": "^2.4",
-        "fideloper/proxy": "~3.3",
-        "guzzlehttp/guzzle": "^6.3",
-        "intervention/image": "^2.4",
-        "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4",
-        "laraveles/spanish": "^1.0",
-        "moment/moment": "^2.22",
-        "nesbot/carbon": "^1.33",
-        "predis/predis": "^1.1",
-        "teepluss/restable": "^2.0"
-    },
-    "require-dev": {
-        "filp/whoops": "~2.0",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0"
-    },
-    "autoload": {
-        "files": [
-            "app/Http/helpers.php"
-        ],
-        "classmap": [
-            "database"
-        ],
-        "psr-4": {
-            "App\\": "app/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-            ]
-        }
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate"
-        ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true,
-		"plataform":{"php":"[7.0.30]"}
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "select2/select2",
+  "description": "Select2 is a jQuery based replacement for select boxes.",
+  "type": "component",
+  "homepage": "https://select2.org/",
+  "license": "MIT",
+  "require": {
+    "robloach/component-installer": "*"
+  },
+  "extra": {
+    "component": {
+      "scripts": [
+        "dist/js/select2.js"
+      ],
+      "styles": [
+        "dist/css/select2.css"
+      ],
+      "files": [
+        "dist/js/select2.js",
+        "dist/js/i18n/*.js",
+        "dist/css/select2.css"
+      ]
+    }
+  }
 }

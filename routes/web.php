@@ -20,6 +20,7 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], f
     Route::get('selectso','ServidoresController@getso');
     Route::post('selectversionRoute', 'ServidoresController@consultarVersiones')->name('ruta.consulta.so');
     Route::post('selectmodeloRoute', 'ServidoresController@consultarModelos')->name('ruta.consulta.mod');
+    Route::post('selectinstanciaRoute', 'IndisponibilidadController@consultarInstancias')->name('ruta.consulta.instancia');
     Route::resource('rolesRoute', 'RolesController');
     Route::resource('indisponibilidadRoute', 'IndisponibilidadController');
     Route::resource('sisopRoute', 'SisopController');      
@@ -39,6 +40,15 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], f
     Route::resource('users', 'UsersController')->middleware('Role:Superadmin|Admin');
     Route::get('profileedit/{id}', 'ProfileController@edit');
     Route::put('profileupdate/{id}', 'ProfileController@update');
+    Route::get('tags', function (Illuminate\Http\Request  $request) {
+        $term = $request->term ?: '';
+        $tags = App\Instancias::where('nombre', 'like', $term.'%')->lists('nombre', 'id');
+        $valid_tags = [];
+        foreach ($tags as $id => $tag) {
+            $valid_tags[] = ['id' => $id, 'text' => $tag];
+        }
+        return \Response::json($valid_tags);
+    });
     
 
 });

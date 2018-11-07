@@ -20,13 +20,13 @@ class Indisponibilidades extends Model
 
     public function server()
     {
-        return $this->belongsToMany('App\Servidores','servidor');
+        return $this->belongsTo('App\Servidores','servidor');
     }
 
     public function instancias()
     {
-        return $this->belongsToMany('App\Instancias','instancia');
+        return $this->belongsTo('App\Instancias','instancia');
     }
 
- 
+
 }

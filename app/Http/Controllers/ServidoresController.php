@@ -32,7 +32,6 @@ class ServidoresController extends Controller
     }
 
     
-
     public function consultarVersiones(Request $request)
     {
        $id_so = $request->id;
@@ -104,7 +103,6 @@ class ServidoresController extends Controller
     public function edit($id)
     {
         $item = Servidores::findOrFail($id);
-
         return view('admin.servidoresVistas.edit', compact('item'));
     }
 
