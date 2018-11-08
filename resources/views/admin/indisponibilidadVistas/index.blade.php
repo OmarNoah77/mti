@@ -50,7 +50,7 @@
       					@foreach ($items as $item)
       						<tr>
                       <td><a>{{ $item->server->ip }}</a></td>
-                      <td><a>{{ $item->instanciasF->nombre }}</a></td>
+                      <td><a>{{ $item->ixs->nombre }}</a></td>
                       <td><a>{{ $item->hora_inicio }}</a></td>
                       <td><a>{{ $item->hora_final }}</a></td>
                       <td><a>{{ $item->nivel }}</a></td>

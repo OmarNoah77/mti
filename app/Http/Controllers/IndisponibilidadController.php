@@ -24,7 +24,7 @@ class IndisponibilidadController extends Controller
     public function index()
     {
 
-        $items = Indisponibilidades::with('parentIndisponibilidades','server','instanciasF')->get();
+        $items = Indisponibilidades::with('parentIndisponibilidades','server','instanciasF','ixs')->get();
 
         return view('admin.indisponibilidadVistas.index', compact('items'));
     }
@@ -38,7 +38,6 @@ class IndisponibilidadController extends Controller
         $respuesta2 = array(); 
         $respuesta2['ixs'] = $ixs->toArray(); 
         return response()->json($respuesta2); 
-
     }
 
 
@@ -62,10 +61,42 @@ class IndisponibilidadController extends Controller
      */
     public function store(Request $request)
     {
-        Indisponibilidades::create($request->all());
+       //Indisponibilidades::create($request->all()); 
+        $intancia = $request->get('instancia'); 
+        $nivel = $request->get('nivel'); 
+        $servidor = $request->get('servidor'); 
+        $hora_inicio = $request->get('hora_inicio'); 
+        $hora_final = $request->get('hora_final'); 
+        $descripcion = $request->get('descripcion'); 
 
-        //return back()->withSuccess(trans('app.success_store'));
-        return redirect()->route(ADMIN.'.indisponibilidadRoute.index')->withSuccess(trans('app.success_store'));
+        $Indisponibilidades = []; 
+
+        foreach($intancia as $insta) 
+        { 
+        if(! empty($insta)) 
+        { 
+        // Get the current time 
+            $now = date('Y-m-d');
+
+            // Formulate record that will be saved 
+            $Indisponibilidades[] = [ 
+            'instancia' => $insta, 
+            'nivel' => $nivel, 
+            'servidor' => $servidor, 
+            'hora_inicio' => $hora_inicio, 
+            'hora_final' => $hora_final, 
+            'descripcion' => $descripcion, 
+            'updated_at' => $now, 
+            'created_at' => $now 
+            ]; 
+        } 
+        } 
+
+        Indisponibilidades::insert($Indisponibilidades); 
+
+        //return back()->withSuccess(trans('app.success_store')); 
+        return redirect()->route(ADMIN.'.indisponibilidadRoute.index')->withSuccess(trans('app.success_store')); 
+
     }
 
     /**

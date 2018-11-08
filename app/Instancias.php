@@ -20,6 +20,6 @@ class Instancias extends Model
 
     public function indisponibilidad()
     {
-        return $this->belongsToMany('App\Indisponibilidades');
+        return $this->hasMany('App\Indisponibilidades');
     }
 }

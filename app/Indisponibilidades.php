@@ -25,8 +25,14 @@ class Indisponibilidades extends Model
 
     public function instanciasF()
     {
-        return $this->belongsTo('App\Instancias','id');
+        return $this->belongsTo('App\Instancias','instancia');
     }
+
+    public function ixs()
+    {
+        return $this->belongsTo('App\Ixs','instancia');
+    }
+
 
 
 }

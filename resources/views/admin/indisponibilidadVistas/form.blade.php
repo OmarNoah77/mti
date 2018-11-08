@@ -8,14 +8,12 @@
 <div class="row">  <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
       <div class="box-body" style="margin:10px;">
-            <div class="requerido-con-instancia">
           <label class="col-sm-5" for="nombre">Instancia</label>
           <br>
-            <select name="instancia" id="instancia" class="requerido-con-instancia" style="width: 100%" multiple="multiple">
+            <select name="instancia[]" id="instancia" style="width: 100%" multiple="multiple">
                <option value="">Selecciona un servidor primero</option>
             </select>
           <br>
-          </div>
       </div>
     </div>
   </div>
@@ -49,7 +47,7 @@
             }).done(function(response) { 
             var html = '<option value="">Selecciona una opción</option>'; 
             $.each(response.ixs, function(i, elem){ 
-            html += '<option value="'+ elem.id +'">'+ elem.configuracion +'</option>' 
+            html += '<option value="'+ elem.id +'">'+ elem.nombre +'</option>' 
             }); 
             $('#instancia').html(html); 
             }).fail(function(data) { 
@@ -58,59 +56,10 @@
         }
     </script>
 
-
-<!-- Script Select2 -->
-
-
-
-<!-- <label>Seleccionar Servidor</label>
-
-
-
-<br><br> 
-
-{!! Form::mySelect('servidor', 'Servidor: ', App\Servidores::pluck('ip', 'id')->toArray(), null, ['class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
-
-{!! Form::mySelect('instancia', 'Instancia: ', App\Instancias::pluck('nombre', 'id')->toArray(), null, ['class'=>'chosen', 'placeholder' => 'Escoge una opción']) !!}
-
--->
-
 <!-- {!! Form::mySelect('instancia', 'Instancia', App\Instancias::pluck('nombre', 'id')->toArray(), null, ['required','class'=>'chosen', 'placeholder' => 'Escoge una opción', 'name' => 'instancia','id' => 'instancia','multiple' => 'multiple']) !!} -->
-
-
-<!-- <div class="requerido-con-instancia">
-	<div class="row">
-  <div class="col-sm-12">
-    <div class="box" style="border:2px solid #d2d6de;">
-    	<div class="box-body" style="margin:10px;">
-
-
-</div>
-</div>
-</div>
-</div>
-</div> -->
-
 
 {!! Form::myInput('datetime-local', 'hora_inicio', 'Hora inicio: ', ['required']) !!}
 
 {!! Form::myInput('datetime-local', 'hora_final', 'Hora final: ' , ['required']) !!}
 
 {!! Form::myInput('text', 'descripcion', 'Descripción: ', ['required']) !!}
-
- <script>
-     $(function() 
-      {
-      $("#ListaNivel").change(function()
-        {
-          if($("option:selected", this).text() == 'Instancia')
-          {
-              $(".requerido-con-instancia").show();
-            }
-            else
-            {
-              $(".requerido-con-instancia").hide();         
-            }
-        });
-      });
-  </script>
